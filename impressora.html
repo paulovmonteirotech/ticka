@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ticka</title>
+<style>
+    body { font-family: Arial; margin: 30px; }
+    form { padding: 20px; border: 1px solid #ccc; margin-bottom: 40px; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select, textarea { width: 100%; padding: 6px; margin-top: 5px; }
+</style>
+</head>
+<body>
+<header><h1>Ticka</h1></header>
+<h2>Chamado – Impressora / Scanner</h2>
+<form action="mailup.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="tipo" value="impressora">
+
+    <label>Setor *</label>
+    <input type="text" name="setor" required>
+
+    <label>Requerente *</label>
+    <input type="text" name="requerente" required>
+
+   <label>Selecione seus problema(s) *</label>
+    <div>
+        <input type="checkbox" name="problemas[]" value="Trocar Toner"> <label for="toner">Trocar Toner</label><br>
+        <input type="checkbox" name="problemas[]" value="Papel agarrou"> <label for="papel">Papel agarrou</label><br>
+        <input type="checkbox" name="problemas[]" value="Scanear"> <label for="scanear">Scanear</label><br>
+        <input type="checkbox" name="problemas[]" value="PC não acha impressora"> <label for="pc_impressora">PC não acha impressora</label><br>
+        <input type="checkbox" name="problemas[]" value="Mensagem de trocar cilindro"> <label for="cilindro">Mensagem de trocar cilindro</label><br>
+        <input type="checkbox" name="problemas[]" value="Manchas na impressão"> <label for="manchas">Manchas na impressão</label><br>
+        <input type="checkbox" name="problemas[]" value="Nenhum"> <label for="nenhum">Nenhum</label><br>
+        <input type="checkbox" name="problemas[]" value="Outro"> <label for="outro_impressora">Outro</label><br>
+    </div>
+    <input type="hidden" name="problema" value="">
+
+    <label>Observações (opcional)</label>
+    <textarea name="descricao"></textarea>
+
+    
+    <label>Anexar Arquivo (Opcional - docs, pdf, imagens, planilhas, apresentações)</label>
+    <input type="file" name="anexo" accept=".doc, .docx, .pdf, .jpg, .jpeg, .png, .gif, .xls, .xlsx, .ppt, .pptx">
+
+  
+    <label>E-mail do solicitante </label>
+    <input type="email" name="email">
+
+    <button type="submit">Enviar Chamado</button>
+</form>
+
+</body>
+</html>
