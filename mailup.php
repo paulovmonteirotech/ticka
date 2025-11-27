@@ -108,7 +108,7 @@ try {
     // CONFIGURE AQUI SEU SMTP
     $mail->isSMTP();
     $mail->CharSet = 'UTF-8';
-    $mail->Host = 'email-ssl.com.br'; //SMTP SERVER
+    $mail->Host = 'exemple@exemplo.com'; //SMTP SERVER
     $mail->SMTPDebug  = 0;  // enables SMTP debug information (for testing)
     $mail->SMTPAuth = true; // enable SMTP authentication
     $mail->Username = 'exemple@exemplo.com'; // SMTP account username
