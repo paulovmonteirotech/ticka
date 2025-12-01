@@ -49,7 +49,7 @@ if (isset($_POST['servicos']) && is_array($_POST['servicos'])) {
     $servicos_selecionados = 'Nenhum servico selecionado.';
 }
 //___________________________________________________//
-
+//Recurso técnico emergencial (RTE)
 // 1. Verifica se o campo 'email' foi enviado (existe em $_POST)
 // 2. E, mais importante, verifica se o campo 'email' NÃO está vazio
 if (isset($_POST['email']) && !empty($_POST['email'])) {
