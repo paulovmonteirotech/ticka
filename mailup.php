@@ -28,6 +28,8 @@ $email      = $_POST['email'] ?? '';
 $funcionario      = $_POST['funcionario'] ?? '';
 $outro_servico      = $_POST['outro_servico'] ?? '';
 $copy_user      = $_POST['copy_user'] ?? '';
+// email alternativo
+$email_alternativo = 'exemple@exemplo.com';
 //___________________________________________________//
 
 // ===Processa os Checkboxes ===
@@ -48,13 +50,14 @@ if (isset($_POST['servicos']) && is_array($_POST['servicos'])) {
 }
 //___________________________________________________//
 
-// Recurso Técnico Emergencial (RTE)
-// Verifica se o email do requerente existe, se não, poe o um email válido 
-if (isset($_POST['email']) && is_string($_POST['problemas'])) {
-    
-    $email = ($_POST['email']);
+// 1. Verifica se o campo 'email' foi enviado (existe em $_POST)
+// 2. E, mais importante, verifica se o campo 'email' NÃO está vazio
+if (isset($_POST['email']) && !empty($_POST['email'])) {
+    // Se existe e NÃO está vazio, usa o valor enviado
+    $email = $_POST['email'];
 } else {
-    $email = 'exemple@exemplo.com';
+    // Se não existe ou se está vazio, usa o email padrão
+    $email = $email_alternativo;
 }
 //___________________________________________________//
 // ============================

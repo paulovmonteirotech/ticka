@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ticka</title>
+<style>
+    body { font-family: Arial; margin: 30px; }
+    form { padding: 20px; border: 1px solid #ccc; margin-bottom: 40px; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select, textarea { width: 100%; padding: 6px; margin-top: 5px; }
+</style>
+</head>
+<body>
+<header><h1>Ticka</h1></header>
+<h2>Chamado – Sagicon</h2>
+<form action="mailup.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="tipo" value="remove_user">
+
+    <label>Nome completo do Funcionário removido *</label>
+    <input type="text" name="funcionario" required>
+
+     <label>Setor *</label>
+    <input type="text" name="setor" required>
+
+    <label>Tipo de funcionario*</label>
+    <div>
+        <input type="checkbox" name="problemas[]" value="Estagiário"> <label for="estagiario">Estagiário</label><br>
+        <input type="checkbox" name="problemas[]" value="Acesssor"> <label for="acessor">Acesssor</label><br>
+        <input type="checkbox" name="problemas[]" value="Servidor"> <label for="Servidor">Servidor</label><br>
+        <input type="checkbox" name="problemas[]" value="Outro"> <label for="outro">Outro</label><br>
+    </div>
+    <input type="hidden" name="problema" value="" required> 
+    
+    <label>Se marcou Outro, descreva</label>
+    <textarea name="descricao"></textarea>
+    
+    <label>Serviços *</label>
+    <div>
+        <input type="checkbox" name="servicos[]" value="Login Computador"> <label for="login_computador">Login Computador</label><br>
+        <input type="checkbox" name="servicos[]" value="Sagicon"> <label for="sagicon">Sagicon</label><br>
+        <input type="checkbox" name="servicos[]" value="Digidesk"> <label for="digidesk">Digidesk</label><br>
+        <input type="checkbox" name="servicos[]" value="Webmail"> <label for="webmail">Webmail</label><br>
+        <input type="checkbox" name="servicos[]" value="Outro"> <label for="other_services">Outro</label><br>
+    </div>
+    <input type="hidden" name="servico" value="" required> 
+    
+    <label>Se marcou Outro, descreva</label>
+    <textarea name="outro_servico"></textarea>
+
+
+    <label>Requerente *</label>
+    <input type="text" name="requerente" required>
+    
+
+    <label>E-mail do solicitante *</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">Enviar Chamado</button>
+</form>
+
+
+</body>
+</html>
