@@ -28,6 +28,7 @@ $email      = $_POST['email'] ?? '';
 $funcionario      = $_POST['funcionario'] ?? '';
 $outro_servico      = $_POST['outro_servico'] ?? '';
 $copy_user      = $_POST['copy_user'] ?? '';
+$url_site      = $_POST['url_site'] ?? '';
 // email alternativo
 $email_alternativo = 'exemple@exemplo.com';
 //___________________________________________________//
@@ -77,7 +78,8 @@ switch ($tipo) {
             <b>Requerente:</b> $requerente<br>
             <b>Problema(s):</b> $problemas_selecionados<br>
             <b>Descrição:</b> $descricao<br>
-            <b>E-mail:</b> $email<br>
+            <br>
+            <b>E-mail do Requerente:</b> $email<br>
         ";
 
     break;
@@ -93,12 +95,14 @@ switch ($tipo) {
             <b>Requerente:</b> $requerente<br>
             <b>Problema(s):</b> $problemas_selecionados<br>
             <b>Observações:</b> $descricao<br>
-            <b>E-mail:</b> $email<br>
+            <br>
+
+            <b>E-mail do Requerente:</b> $email<br>
         ";
     break;
 
      // --------------------------
-    // 🔹 ROTA IMPRESSORA
+    // 🔹 ROTA new_user
     // --------------------------
     case 'new_user':
         $assunto = "Chamado Novo Usuário - $requerente";
@@ -109,15 +113,71 @@ switch ($tipo) {
             <b>Tipo de funcionario:</b> $problemas_selecionados<br>
             <b>Outro tipo:</b> $descricao<br>
             <b>Serviços:</b> $servicos_selecionados<br>
-            <b>Outros $outro_servico<br>
+            <b>Outros </b> $outro_servico<br>
             <b>Copiar Usuário:</b> $copy_user<br>
             <b>Requerente:</b> $requerente<br>
             <br>
             
-            <b>E-mail:</b> $email<br>
+            <b>E-mail do Requerente:</b> $email<br>
         ";
     break;
 
+     // --------------------------
+    // 🔹 ROTA remove_user
+    // --------------------------
+    case 'remove_user':
+        $assunto = "Chamado Remover Usuário - $requerente";
+        $mensagem = "
+            <h2>Remover Usuário</h2>
+            <b>Remover Funcionário:</b> $funcionario<br>
+            <b>Setor:</b> $setor<br>
+            <b>Tipo de funcionario:</b> $problemas_selecionados<br>
+            <b>Outro tipo:</b> $descricao<br>
+            <b>Serviços:</b> $servicos_selecionados<br>
+            <b>Outros</b> $outro_servico<br>
+            <b>Requerente:</b> $requerente<br>
+            <br>
+            
+            <b>E-mail do Requerente:</b> $email<br>
+        ";
+    break;
+    
+    // --------------------------
+    // 🔹 ROTA forgot_paass
+    // --------------------------
+    case 'forgot_paass':
+        $assunto = "Chamado Esqueci Senha - $requerente";
+        $mensagem = "
+            <h2>Esqueci Senha</h2>
+            <b>Requerente:</b> $requerente<br>
+            <b>Setor:</b> $setor<br>
+             <b>Serviços:</b> $servicos_selecionados<br>
+            <b>Outros</b> $outro_servico<br>
+            <b>Nome do usuário ou email:</b> $descricao<br>
+            <br>
+            
+            <b>E-mail do Requerente:</b> $email<br>
+        ";
+    break;
+
+
+    // --------------------------
+    // 🔹 ROTA unlock_site
+    // --------------------------
+    case 'unlock_site':
+        $assunto = "Chamado Liberar Site - $requerente";
+        $mensagem = "
+            <h2>Liberar Site</h2>
+            <b>Requerente:</b> $requerente<br>
+            <b>Setor:</b> $setor<br>
+            <b>Link do Site:</b> $url_site<br>
+            <b>Observaçãp:</b> $descricao<br>
+            <br>
+            
+            <b>E-mail do Requerente:</b> $email<br>
+        ";
+    break;
+    
     // --------------------------
     default:
         die("Tipo de chamado inválido.");

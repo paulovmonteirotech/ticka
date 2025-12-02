@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Ticka</title>
+<style>
+    body { font-family: Arial; margin: 30px; }
+    form { padding: 20px; border: 1px solid #ccc; margin-bottom: 40px; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    input, select, textarea { width: 100%; padding: 6px; margin-top: 5px; }
+</style>
+</head>
+<body>
+<header><h1>Ticka</h1></header>
+<h2>Chamado – Impressora / Scanner</h2>
+<form action="mailup.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="tipo" value="other">
+
+    <label>Setor *</label>
+    <input type="text" name="setor" required>
+
+    <label>Requerente *</label>
+    <input type="text" name="requerente" required>
+
+   <label>Problemas com Equipamentos?</label>
+        <div>
+            <input type="checkbox" name="problemas_gerais[]" value="Não" id="nao_problema"> <label for="nao_problema">Não</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Monitor" id="monitor"> <label for="monitor">Monitor</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Mouse" id="mouse"> <label for="mouse">Mouse</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Teclado" id="teclado"> <label for="teclado">Teclado</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Som" id="som"> <label for="som">Som</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Computador" id="computador"> <label for="computador">Computador</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Fios" id="fios"> <label for="fios">Fios</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Telefone" id="telefone"> <label for="telefone">Telefone</label>
+            <input type="checkbox" name="problemas_gerais[]" value="SoftPhone" id="softphone"> <label for="softphone">SoftPhone</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Impressora" id="impressora"> <label for="impressora">Impressora</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Estou sem Internet" id="sem_internet"> <label for="sem_internet">Estou sem Internet</label>
+            <input type="checkbox" name="problemas_gerais[]" value="Outro" id="outro_geral"> <label for="outro_geral">Outro</label>
+        </div>
+        <input type="hidden" name="problema" value="">
+
+    <label>Descreva Seu Problema (opcional)</label>
+    <textarea name="descricao"></textarea>
+
+    
+    <label>Anexar Arquivo (Opcional - docs, pdf, imagens, planilhas, apresentações)</label>
+    <input type="file" name="anexo" accept=".doc, .docx, .pdf, .jpg, .jpeg, .png, .gif, .xls, .xlsx, .ppt, .pptx">
+    
+    <label>Mudança de nome? Escreva seu nome antigo e atual:</label>
+    <textarea name="outro_servico"></textarea>
+
+  
+    <label>E-mail do solicitante </label>
+    <input type="email" name="email">
+
+    <button type="submit">Enviar Chamado</button>
+</form>
+
+</body>
+</html>
