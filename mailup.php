@@ -29,6 +29,10 @@ $funcionario      = $_POST['funcionario'] ?? '';
 $outro_servico      = $_POST['outro_servico'] ?? '';
 $copy_user      = $_POST['copy_user'] ?? '';
 $url_site      = $_POST['url_site'] ?? '';
+$conta_google      = $_POST['conta_google'] ?? '';
+$data      = $_POST['data'] ?? '';
+$hora      = $_POST['hora'] ?? '';
+$tema      = $_POST['hora'] ?? '';
 // email alternativo
 $email_alternativo = 'exemple@exemplo.com';
 //___________________________________________________//
@@ -143,9 +147,9 @@ switch ($tipo) {
     break;
     
     // --------------------------
-    // 🔹 ROTA forgot_paass
+    // 🔹 ROTA forgot_pass
     // --------------------------
-    case 'forgot_paass':
+    case 'forgot_pass':
         $assunto = "Chamado Esqueci Senha - $requerente";
         $mensagem = "
             <h2>Esqueci Senha</h2>
@@ -179,9 +183,70 @@ switch ($tipo) {
     break;
     
     // --------------------------
+    // 🔹 ROTA other
+    // --------------------------
+    case 'other':
+        $assunto = "Chamado Outros - $requerente";
+        $mensagem = "
+            <h2>Outros</h2>
+            <b>Requerente:</b> $requerente<br>
+            <b>Setor:</b> $setor<br>
+            <b>Problemas com Equipamentos?:</b>$problemas_selecionados<br>
+            <b>Descreva Seu Problema:</b> $descricao<br>
+            <b>Mudança de Nome?:</b> $outro_servico <br>
+            <br>
+            
+            <b>E-mail do Requerente:</b> $email<br>
+        ";
+    break;
+    
+    // --------------------------
+    // 🔹 ROTA meet
+    // --------------------------
+    case 'meet':
+        $assunto = "Chamado Vídeo Conferência - $requerente";
+        $mensagem = "
+            <h2>Vídeo Conferência</h2>
+            <b>Requerente:</b> $requerente<br>
+            <b>Setor:</b> $setor<br>
+            <b>Tipo de Reunião:</b>$problemas_selecionados<br>
+            <b>Tema/Assunto:</b> $tema<br>
+            <b>Data:</b> $data<br>
+            <b>Horário:</b> $hora<br>
+            <b>Outros horários?:</b> $outro_servico <br>
+            <b>Alguma Observação?:</b> $descricao<br>
+            <b>E-mail do Coorganizador:<b>$conta_google<br>
+            <br>
+
+            <b>E-mail do Requerente:</b> $email<br>
+        ";
+    break;
+
+    /*// --------------------------
+    // 🔹 ROTA exemple
+    // --------------------------
+    case 'exemple':
+        $assunto = "Chamado Exemple - $requerente";
+        $mensagem = "
+            <h2> Exemple</h2>
+            <b>Requerente:</b> $requerente<br>
+            <b>Setor:</b> $setor<br>
+            <b>Exemple:</b>$problemas_selecionados<br>
+            <b>Exemple 2:</b> $outro_servico <br>
+            <b>Exemple 3:</b> $descricao<br>
+            <br>
+
+            <b>E-mail do Requerente:</b> $email<br>
+        ";
+    break;*/
+
+
+    // --------------------------
     default:
         die("Tipo de chamado inválido.");
 }
+
+
 //___________________________________________________//
 
 // ============================

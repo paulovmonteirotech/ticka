@@ -12,40 +12,49 @@
 </head>
 <body>
 <header><h1>Ticka</h1></header>
-<h2>Chamado – Impressora / Scanner</h2>
+<h2>Vídeo Conferência</h2>
 <form action="mailup.php" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="tipo" value="other">
+    <input type="hidden" name="tipo" value="meet">
 
     <label>Setor *</label>
     <input type="text" name="setor" required>
 
     <label>Requerente *</label>
     <input type="text" name="requerente" required>
+
+    <label>E-mail do solicitante </label>
+    <input type="email" name="email">
+    
+   
+    <label>Tipo de Reunião:*</label>
+        <div>
+            <input type="checkbox" name="problemas[]" value="aberto" id="aberto"> <label for="aberto">Aberta (não necessário solicitação para participar)</label>
+            <input type="checkbox" name="problemas[]" value="restrito" id="restrito"> <label for="monitor">Restrito (acesso somente mediante autorização)
+    </label>
+        </div>
+    <input type="hidden" name="problema" value="">
     
     <label>Tema/Assunto *</label>
     <input type="text" name="tema" required>
 
-   <label>Problemas com Equipamentos?</label>
-        <div>
-            <input type="checkbox" name="problemas_gerais[]" value="aberto" id="aberto"> <label for="nao_problema">Não</label>
-            <input type="checkbox" name="problemas_gerais[]" value="restrito" id="restrito"> <label for="monitor">Monitor</label>
-           
-        </div>
-        <input type="hidden" name="problema" value="">
 
-    <label>Descreva Seu Problema (opcional)</label>
-    <textarea name="descricao"></textarea>
+    <!--
+            Data
+    
+            Horário
+    -->
 
-    
-    <label>Anexar Arquivo (Opcional - docs, pdf, imagens, planilhas, apresentações)</label>
-    <input type="file" name="anexo" accept=".doc, .docx, .pdf, .jpg, .jpeg, .png, .gif, .xls, .xlsx, .ppt, .pptx">
-    
-    <label>Mudança de nome? Escreva seu nome antigo e atual:</label>
+    <label>Deseja outros Horários?</label>
     <textarea name="outro_servico"></textarea>
 
-  
-    <label>E-mail do solicitante </label>
-    <input type="email" name="email">
+    <label>Alguma Observação?</label>
+    <textarea name="descricao"></textarea>
+
+    <label>Necessário gravação? Caso sim, E-mail do Coorganizador:
+OBRIGATÓRIO CONTA GOOGLE </label>
+    <textarea name="conta_google"></textarea>
+    
+
 
     <button type="submit">Enviar Chamado</button>
 </form>
