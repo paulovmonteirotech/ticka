@@ -73,9 +73,9 @@ if (isset($_POST['email']) && !empty($_POST['email'])) {
 switch ($tipo) {
 
     // --------------------------
-    // 🔹 ROTA SAGICON
+    // 🔹 TICKA_SAGICON
     // --------------------------
-    case 'sagicon':
+    case 'TICKA_SAGICON':
         $assunto = "Chamado SAGICON - $requerente";
         $mensagem = "
             <h2>Chamado SAGICON</h2>
@@ -90,9 +90,9 @@ switch ($tipo) {
     break;
 
     // --------------------------
-    // 🔹 ROTA IMPRESSORA
+    // 🔹 ROTA TICKA_IMPRESSORA_SCAN
     // --------------------------
-    case 'impressora':
+    case 'TICKA_IMPRESSORA_SCAN':
         $assunto = "Chamado IMPRESSORA/SCANNER - $requerente";
         $mensagem = "
             <h2>Chamado Impressora / Scanner</h2>
@@ -107,9 +107,9 @@ switch ($tipo) {
     break;
 
      // --------------------------
-    // 🔹 ROTA new_user
+    // 🔹 ROTA TICKA_NEW_USER
     // --------------------------
-    case 'new_user':
+    case 'TICKA_NEW_USER':
         $assunto = "Chamado Novo Usuário - $requerente";
         $mensagem = "
             <h2>Novo Usuário</h2>
@@ -128,9 +128,9 @@ switch ($tipo) {
     break;
 
      // --------------------------
-    // 🔹 ROTA remove_user
+    // 🔹 ROTA TICKA_REMOVE_USER
     // --------------------------
-    case 'remove_user':
+    case 'TICKA_REMOVE_USER':
         $assunto = "Chamado Remover Usuário - $requerente";
         $mensagem = "
             <h2>Remover Usuário</h2>
@@ -148,9 +148,9 @@ switch ($tipo) {
     break;
     
     // --------------------------
-    // 🔹 ROTA forgot_pass
+    // 🔹 ROTA TICKA_FORGOT_PASS
     // --------------------------
-    case 'forgot_pass':
+    case 'TICKA_FORGOT_PASS':
         $assunto = "Chamado Esqueci Senha - $requerente";
         $mensagem = "
             <h2>Esqueci Senha</h2>
@@ -167,9 +167,9 @@ switch ($tipo) {
 
 
     // --------------------------
-    // 🔹 ROTA unlock_site
+    // 🔹 ROTA TICKA_UNLOCK_SITE
     // --------------------------
-    case 'unlock_site':
+    case 'TICKA_UNLOCK_SITE':
         $assunto = "Chamado Liberar Site - $requerente";
         $mensagem = "
             <h2>Liberar Site</h2>
@@ -184,9 +184,9 @@ switch ($tipo) {
     break;
     
     // --------------------------
-    // 🔹 ROTA other
+    // 🔹 ROTA TICKA_OTHER
     // --------------------------
-    case 'other':
+    case 'TICKA_OTHER':
         $assunto = "Chamado Outros - $requerente";
         $mensagem = "
             <h2>Outros</h2>
@@ -202,9 +202,9 @@ switch ($tipo) {
     break;
     
     // --------------------------
-    // 🔹 ROTA meet
+    // 🔹 ROTA TICKA_MEET
     // --------------------------
-    case 'meet':
+    case 'TICKA_MEET':
         $assunto = "Chamado Vídeo Conferência - $requerente";
         $mensagem = "
             <h2>Vídeo Conferência</h2>

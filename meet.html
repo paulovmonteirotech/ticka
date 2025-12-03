@@ -8,8 +8,8 @@
 <body>
 <header><h1>Ticka</h1></header>
 <h2>Vídeo Conferência</h2>
-<form action="mailup.php" method="POST" enctype="multipart/form-data" id="meet">
-    <input type="hidden" name="tipo" value="meet">
+<form action="mailup.php" method="POST" enctype="multipart/form-data" id="TICKA_MEET">
+    <input type="hidden" name="tipo" value="TICKA_MEETS">
 
     <label>Setor *</label>
     <input type="text" name="setor" required>
@@ -58,7 +58,7 @@ OBRIGATÓRIO CONTA GOOGLE </label>
 
 <script>
         // Encontra o formulário e adiciona um "ouvinte" para o evento de envio
-        document.getElementById('meet').addEventListener('submit', function(event) {
+        document.getElementById('TICKA_MEET').addEventListener('submit', function(event) {
             
             // 1. Pega os elementos
             const dataInput = document.getElementById('data_agendamento');
