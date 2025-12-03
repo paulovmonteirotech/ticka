@@ -3,17 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Ticka</title>
-<style>
-    body { font-family: Arial; margin: 30px; }
-    form { padding: 20px; border: 1px solid #ccc; margin-bottom: 40px; }
-    label { font-weight: bold; display: block; margin-top: 10px; }
-    input, select, textarea { width: 100%; padding: 6px; margin-top: 5px; }
-</style>
+<link rel="stylesheet" href="style_ticka.css">
 </head>
 <body>
 <header><h1>Ticka</h1></header>
 <h2>Vídeo Conferência</h2>
-<form action="mailup.php" method="POST" enctype="multipart/form-data">
+<form action="mailup.php" method="POST" enctype="multipart/form-data" id="meet">
     <input type="hidden" name="tipo" value="meet">
 
     <label>Setor *</label>
@@ -23,7 +18,7 @@
     <input type="text" name="requerente" required>
 
     <label>E-mail do solicitante </label>
-    <input type="email" name="email">
+    <input type="email" name="r_email">
     
    
     <label>Tipo de Reunião:*</label>
@@ -37,12 +32,14 @@
     <label>Tema/Assunto *</label>
     <input type="text" name="tema" required>
 
+    <label for="data_agendamento">Selecione a Data:</label>
+    <input type="date" id="data_agendamento" name="data_agendamento" required>
+    <br>
+    <input type="hidden" id="data_agendamento_formatada" name="data_agendamento_formatada">
 
-    <!--
-            Data
-    
-            Horário
-    -->
+    <label for="hora_agendamento">Selecione a Hora:</label>
+    <input type="time" id="hora_agendamento" name="hora_agendamento" required>
+    <br>
 
     <label>Deseja outros Horários?</label>
     <textarea name="outro_servico"></textarea>
@@ -58,6 +55,37 @@ OBRIGATÓRIO CONTA GOOGLE </label>
 
     <button type="submit">Enviar Chamado</button>
 </form>
+
+<script>
+        // Encontra o formulário e adiciona um "ouvinte" para o evento de envio
+        document.getElementById('meet').addEventListener('submit', function(event) {
+            
+            // 1. Pega os elementos
+            const dataInput = document.getElementById('data_agendamento');
+            const hiddenInput = document.getElementById('data_agendamento_formatada');
+            
+            // Pega o valor padrão do campo date (YYYY-MM-DD)
+            const dataValor = dataInput.value; 
+
+            // Verifica se a data foi preenchida
+            if (dataValor) {
+                // 2. Divide a string YYYY-MM-DD em partes [YYYY, MM, DD]
+                const partes = dataValor.split('-');
+                
+                // 3. Reorganiza as partes para DD/MM/YYYY e preenche o campo oculto
+                // partes[2] = DD, partes[1] = MM, partes[0] = YYYY
+                hiddenInput.value = partes[2] + '/' + partes[1] + '/' + partes[0];
+            } else {
+                // Se por algum motivo a data não estiver preenchida (embora esteja 'required'),
+                // cancela o envio para evitar erros.
+                event.preventDefault(); 
+            }
+            
+            // O formulário continua o envio com o campo 'data_agendamento_formatada' preenchido
+            // com a data no formato brasileiro.
+        });
+    </script>
+
 
 </body>
 </html>

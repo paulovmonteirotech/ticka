@@ -13,7 +13,8 @@ header("Content-type: text/html; charset=utf-8");
 
 // Verifica se tipo foi passado pelo método POST
 if (!isset($_POST['tipo'])) {
-    die("Tipo de chamado não especificado.");
+    die("<meta http-equiv='refresh' content='1; url=https://servicos.crf-rj.org.br/intra/chamados.html'>");
+   
 }
 
 //Atribui o valor de tipo // importante para o switch case
@@ -24,15 +25,15 @@ $tipo = $_POST['tipo'];
 $setor      = $_POST['setor'] ?? '';
 $requerente = $_POST['requerente'] ?? '';
 $descricao  = $_POST['descricao'] ?? '';
-$email      = $_POST['email'] ?? '';
+$r_email      = $_POST['email'] ?? '';
 $funcionario      = $_POST['funcionario'] ?? '';
 $outro_servico      = $_POST['outro_servico'] ?? '';
 $copy_user      = $_POST['copy_user'] ?? '';
 $url_site      = $_POST['url_site'] ?? '';
 $conta_google      = $_POST['conta_google'] ?? '';
-$data      = $_POST['data'] ?? '';
-$hora      = $_POST['hora'] ?? '';
-$tema      = $_POST['hora'] ?? '';
+$data_agendamento_formatada      = $_POST['data_agendamento_formatada'] ?? '';
+$hora_agendamendo      = $_POST['hora_agendamento'] ?? '';
+$tema      = $_POST['tema'] ?? '';
 // email alternativo
 $email_alternativo = 'exemple@exemplo.com';
 //___________________________________________________//
@@ -83,7 +84,7 @@ switch ($tipo) {
             <b>Problema(s):</b> $problemas_selecionados<br>
             <b>Descrição:</b> $descricao<br>
             <br>
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
 
     break;
@@ -101,7 +102,7 @@ switch ($tipo) {
             <b>Observações:</b> $descricao<br>
             <br>
 
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;
 
@@ -122,7 +123,7 @@ switch ($tipo) {
             <b>Requerente:</b> $requerente<br>
             <br>
             
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;
 
@@ -142,7 +143,7 @@ switch ($tipo) {
             <b>Requerente:</b> $requerente<br>
             <br>
             
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;
     
@@ -160,7 +161,7 @@ switch ($tipo) {
             <b>Nome do usuário ou email:</b> $descricao<br>
             <br>
             
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;
 
@@ -178,7 +179,7 @@ switch ($tipo) {
             <b>Observaçãp:</b> $descricao<br>
             <br>
             
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;
     
@@ -196,7 +197,7 @@ switch ($tipo) {
             <b>Mudança de Nome?:</b> $outro_servico <br>
             <br>
             
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;
     
@@ -211,14 +212,14 @@ switch ($tipo) {
             <b>Setor:</b> $setor<br>
             <b>Tipo de Reunião:</b>$problemas_selecionados<br>
             <b>Tema/Assunto:</b> $tema<br>
-            <b>Data:</b> $data<br>
-            <b>Horário:</b> $hora<br>
+            <b>Data:</b> $data_agendamento_formatada<br> 
+            <b>Horário:</b> $hora_agendamendo<br>
             <b>Outros horários?:</b> $outro_servico <br>
             <b>Alguma Observação?:</b> $descricao<br>
             <b>E-mail do Coorganizador:<b>$conta_google<br>
             <br>
 
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;
 
@@ -236,7 +237,7 @@ switch ($tipo) {
             <b>Exemple 3:</b> $descricao<br>
             <br>
 
-            <b>E-mail do Requerente:</b> $email<br>
+            <b>E-mail do Requerente:</b> $r_email<br>
         ";
     break;*/
 
@@ -290,9 +291,11 @@ try {
     }
     // =============================
 
+
     $mail->send();
 
     echo "Chamado enviado com sucesso!";
+    echo "<meta http-equiv='refresh' content='5; url=https://servicos.crf-rj.org.br/intra/chamados.html'>";
 
 } catch (Exception $e) {
     echo "Erro ao enviar: {$mail->ErrorInfo}";
