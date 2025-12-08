@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require './PHPMailer/src/Exception.php';
 require './PHPMailer/src/PHPMailer.php';
 require './PHPMailer/src/SMTP.php';
+require 'conf.php';
 //___________________________________________________//
 
 
@@ -13,7 +14,7 @@ header("Content-type: text/html; charset=utf-8");
 
 // Verifica se tipo foi passado pelo método POST
 if (!isset($_POST['tipo'])) {
-    die("<meta http-equiv='refresh' content='1; url=https://servicos.crf-rj.org.br/intra/chamados.html'>");
+    die("<meta http-equiv='refresh' content='1; url=https://exemplo.com'>");
    
 }
 
@@ -34,8 +35,7 @@ $conta_google      = $_POST['conta_google'] ?? '';
 $data_agendamento_formatada      = $_POST['data_agendamento_formatada'] ?? '';
 $hora_agendamendo      = $_POST['hora_agendamento'] ?? '';
 $tema      = $_POST['tema'] ?? '';
-// email alternativo
-$email_alternativo = 'exemple@exemplo.com';
+
 //___________________________________________________//
 
 // ===Processa os Checkboxes ===
@@ -55,21 +55,24 @@ if (isset($_POST['servicos']) && is_array($_POST['servicos'])) {
     $servicos_selecionados = 'Nenhum servico selecionado.';
 }
 //___________________________________________________//
+
+
 //Recurso técnico emergencial (RTE)
-// 1. Verifica se o campo 'email' foi enviado (existe em $_POST)
-// 2. E, mais importante, verifica se o campo 'email' NÃO está vazio
-if (isset($_POST['email']) && !empty($_POST['email'])) {
+// 1. Verifica se o campo 'r_email' foi enviado (existe em $_POST)
+// 2. E, mais importante, verifica se o campo 'r_email' NÃO está vazio
+if (isset($_POST['r_email']) && !empty($_POST['r_email'])) {
     // Se existe e NÃO está vazio, usa o valor enviado
-    $email = $_POST['email'];
+    $r_email = $_POST['r_email'];
 } else {
     // Se não existe ou se está vazio, usa o email padrão
-    $email = $email_alternativo;
+    $r_email = $r_email_alternativo;
 }
+
 //___________________________________________________//
 // ============================
 // 🔵 SISTEMA DE ROTAS
 // ============================
-
+require 'db.php';
 switch ($tipo) {
 
     // --------------------------
@@ -86,7 +89,22 @@ switch ($tipo) {
             <br>
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
-
+        $entrds = "INSERT INTO TICKA_SAGICON (
+        REQUERENTE, 
+        SETOR, 
+        PROBLEMA, 
+        DESCRICAO, 
+        R_EMAIL
+        ) VALUES (
+        '".$requerente."', 
+        '".$setor."', 
+        '".$problemas_selecionados."', 
+        '".$descricao."', 
+        '".$r_email."'
+         );"
+        ;
+        $insert = mysqli_query($connection , $entrds);
+        mysqli_close($connection);
     break;
 
     // --------------------------
@@ -104,6 +122,22 @@ switch ($tipo) {
 
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
+        $entrds = "INSERT INTO TICKA_IMPRESSORA_SCAN (
+        REQUERENTE, 
+        SETOR, 
+        PROBLEMA, 
+        DESCRICAO, 
+        R_EMAIL
+        ) VALUES (
+        '".$requerente."', 
+        '".$setor."', 
+        '".$problemas_selecionados."', 
+        '".$descricao."', 
+        '".$r_email."'
+        );"
+        ;
+        $insert = mysqli_query($connection , $entrds);
+        mysqli_close($connection);
     break;
 
      // --------------------------
@@ -125,6 +159,32 @@ switch ($tipo) {
             
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
+
+        $entrds = "INSERT INTO TICKA_NEW_USER (
+        REQUERENTE, 
+        SETOR, 
+        NOVO_FUNCIONARIO, 
+        TIPO, 
+        OUTRO_TIPO, 
+        SERVICOS, 
+        OUTROS, 
+        COPY_USER, 
+        R_EMAIL
+        ) VALUES (
+            '".$requerente."', 
+            '".$setor."', 
+            '".$funcionario."',
+            '".$problemas_selecionados."', 
+            '".$descricao."', 
+            '".$servicos_selecionados."',
+            '".$outro_servico."',
+            '".$copy_user."',   
+            '".$r_email."'
+    );";
+    
+    $insert = mysqli_query($connection , $entrds);
+    mysqli_close($connection);
+
     break;
 
      // --------------------------
@@ -145,6 +205,29 @@ switch ($tipo) {
             
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
+
+        $entrds = "INSERT INTO TICKA_REMOVE_USER (
+        REQUERENTE, 
+        SETOR, 
+        REMOVER_FUNCIONARIO, 
+        TIPO, 
+        OUTRO_TIPO, 
+        SERVICOS, 
+        OUTROS, 
+        R_EMAIL
+        ) VALUES (
+            '".$requerente."', 
+            '".$setor."', 
+            '".$funcionario."',
+            '".$problemas_selecionados."', 
+            '".$descricao."', 
+            '".$servicos_selecionados."',
+            '".$outro_servico."',   
+            '".$r_email."'
+        );";
+        $insert = mysqli_query($connection , $entrds);
+        mysqli_close($connection);
+
     break;
     
     // --------------------------
@@ -163,6 +246,26 @@ switch ($tipo) {
             
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
+
+        $entrds = "INSERT INTO TICKA_FORGOT_PASS (
+        REQUERENTE, 
+        SETOR, 
+        DESCRICAO, 
+        R_EMAIL, 
+        SERVICOS, 
+        OUTRO
+        ) VALUES (
+            '".$requerente."', 
+            '".$setor."', 
+            '".$descricao."', 
+            '".$r_email."',
+            '".$servicos_selecionados."',
+            '".$outro_servico."'   
+            
+        );";
+        $insert = mysqli_query($connection , $entrds);
+        mysqli_close($connection);
+
     break;
 
 
@@ -181,6 +284,25 @@ switch ($tipo) {
             
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
+
+        $entrds = "INSERT INTO TICKA_UNLOCK_SITE (
+        REQUERENTE, 
+        SETOR, 
+        DESCRICAO, 
+        R_EMAIL, 
+        URL_SITE
+        ) VALUES (
+            '".$requerente."', 
+            '".$setor."', 
+            '".$descricao."', 
+            '".$r_email."',
+            '".$url_site."'   
+            
+        );";
+        $insert = mysqli_query($connection , $entrds);
+        mysqli_close($connection);
+
+
     break;
     
     // --------------------------
@@ -199,6 +321,26 @@ switch ($tipo) {
             
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
+
+        $entrds = "INSERT INTO TICKA_OTHER (
+        REQUERENTE, 
+        SETOR, 
+        PROBLEMAS, 
+        DESCRICAO, 
+        R_EMAIL, 
+        NOVO_NOME
+        ) VALUES (
+            '".$requerente."', 
+            '".$setor."', 
+            '".$problemas_selecionados."', 
+            '".$descricao."', 
+            '".$r_email."',
+            '".$outro_servico."'   
+            
+        );";
+        $insert = mysqli_query($connection , $entrds);
+        mysqli_close($connection);
+
     break;
     
     // --------------------------
@@ -221,6 +363,34 @@ switch ($tipo) {
 
             <b>E-mail do Requerente:</b> $r_email<br>
         ";
+
+        $entrds = "INSERT INTO TICKA_MEET (
+        REQUERENTE, 
+        SETOR, 
+        TIPO, 
+        TEMA, 
+        DATA_AGENDAMENTO_FORMATADA, 
+        HORA_AGENDAMENTO, 
+        OUTROS_H, 
+        DESCRICAO, 
+        CONTA_GOOGLE, 
+        R_EMAIL
+        ) VALUES (
+            '".$requerente."', 
+            '".$setor."', 
+            '".$problemas_selecionados."', 
+            '".$tema."',
+            '".$data_agendamento_formatada."',
+            '".$hora_agendamendo."',
+            '".$outro_servico."',    
+            '".$descricao."',
+            '".$conta_google."',  
+            '".$r_email."'   
+            
+        );";
+        $insert = mysqli_query($connection , $entrds);
+        mysqli_close($connection);
+
     break;
 
     /*// --------------------------
@@ -246,14 +416,11 @@ switch ($tipo) {
     default:
         die("Tipo de chamado inválido.");
 }
-
-
 //___________________________________________________//
 
 // ============================
 // 🔵 Envio do e-mail (PHPMailer)
 // ============================
-
 
 $mail = new PHPMailer(true);
 
@@ -261,20 +428,19 @@ try {
     // CONFIGURE AQUI SEU SMTP
     $mail->isSMTP();
     $mail->CharSet = 'UTF-8';
-    $mail->Host = 'exemple@exemplo.com'; //SMTP SERVER
+    $mail->Host = $smtp_server; //SMTP SERVER
     $mail->SMTPDebug  = 0;  // enables SMTP debug information (for testing)
     $mail->SMTPAuth = true; // enable SMTP authentication
-    $mail->Username = 'exemple@exemplo.com'; // SMTP account username
-    $mail->Password = 'exemplepassword';  // SMTP account password
+    $mail->Username = $remetente; // SMTP account username
+    $mail->Password = $senha;  // SMTP account password
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;  // set the SMTP port for the GMAIL server
 
     // De e para
-    $mail->setFrom('exemple@exemplo.com', 'Chamados Ticka');
-    $mail->addAddress('exemple@exemplo.com'); // para destino do suporte
-    $mail->addAddress($email);// para destino do requerente
-    $mail->addReplyTo('exemple@exemplo.com'); // Replay To
-
+    $mail->setFrom($from_adress, $from_name);
+    $mail->addAddress($suporte_email); // para destino do suporte
+    $mail->addAddress($r_email);// para destino do requerente
+    $mail->addReplyTo($reply_email); //Replay To
     // Conteúdo
     $mail->isHTML(true);
     $mail->Subject = $assunto;
@@ -291,11 +457,9 @@ try {
     }
     // =============================
 
-
     $mail->send();
 
-    echo "Chamado enviado com sucesso!";
-    echo "<meta http-equiv='refresh' content='5; url=https://servicos.crf-rj.org.br/intra/chamados.html'>";
+    echo "<meta http-equiv='refresh' content='5; url=https:exemplo.com/sucesso.html'>";
 
 } catch (Exception $e) {
     echo "Erro ao enviar: {$mail->ErrorInfo}";
