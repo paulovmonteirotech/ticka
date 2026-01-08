@@ -14,7 +14,7 @@ header("Content-type: text/html; charset=utf-8");
 
 // Verifica se tipo foi passado pelo método POST
 if (!isset($_POST['tipo'])) {
-    die("<meta http-equiv='refresh' content='1; url=https://exemplo.com'>");
+    die("<meta http-equiv='refresh' content='1; url=https://exemplo.org.br/intra/chamados.html'>");
    
 }
 
@@ -35,7 +35,8 @@ $conta_google      = $_POST['conta_google'] ?? '';
 $data_agendamento_formatada      = $_POST['data_agendamento_formatada'] ?? '';
 $hora_agendamendo      = $_POST['hora_agendamento'] ?? '';
 $tema      = $_POST['tema'] ?? '';
-
+// email alternativo
+$r_email_alternativo = 'alternativo@email.org.br';
 //___________________________________________________//
 
 // ===Processa os Checkboxes ===
@@ -459,7 +460,7 @@ try {
 
     $mail->send();
 
-    echo "<meta http-equiv='refresh' content='5; url=https:exemplo.com/sucesso.html'>";
+    echo "<meta http-equiv='refresh' content='5; url=https://exemplo.org.br/ticka/sucesso.html'>";
 
 } catch (Exception $e) {
     echo "Erro ao enviar: {$mail->ErrorInfo}";

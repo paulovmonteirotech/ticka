@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Login LDAP</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        /* Overrides para manter labels alinhadas à esquerda */
+        .login-box label {
+            display: block;
+            text-align: left;
+            margin-bottom: 0.25rem; /* 4px */
+            font-weight: 500;
+        }
+
+        /* Garantir que a imagem não ultrapasse o container */
+        .login-box img.logo-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 1rem auto; /* centraliza e adiciona espaço abaixo */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    
+    <div class="login-box bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
+        <!-- Logo -->
+        <img src="https://servicos.crf-rj.org.br/intra/home/imagens/LOGO-CRF-RJ-HORIZONTAL.png"
+             class="logo-img"
+             alt="Logo">
+             
+   
+<form id="loginForm" class="space-y-4">
+    <div id="msg" class="text-red-600 font-bold text-center"></div>
+    <div class="w-full">
+        <label for="usuario">Usuário</label>
+    <input class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" name="usuario" placeholder="Ex: carlos.silva" required>
+    </div>
+    <div class="w-full">
+        <label for="senha">Senha</label>
+    <input class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="password" name="senha" placeholder="Senha" required>
+    </div>
+    <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition" type="submit">Login</button>
+</form>
+</div>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const formData = {
+        usuario: this.usuario.value,
+        senha: this.senha.value
+    };
+    const response = await fetch('https://servicos.crf-rj.org.br/intra/api_ldap/validacao.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    });
+    const result = await response.json();
+    const msg = document.getElementById('msg');
+    if(result.success){
+        // Redireciona para planilha
+        window.location.href = 'https://servicos.crf-rj.org.br/sischamado/view.php';
+    } else {
+        msg.textContent = result.msg;
+    }
+});
+</script>
+</body>
+</html>
